@@ -1,0 +1,20 @@
+
+    <nav>
+      <a [routerLink]="['/chofer']">Inicio</a>
+      <a [routerLink]="['/kilometraje']">Kilometraje</a>
+      <a [routerLink]="['/combustible']">Combustible</a>
+      <div id="indicator"></div>
+  
+      <div class="dropdown" (mouseenter)="toggleMenu()" (mouseleave)="toggleMenu()">
+          <span>Usuario</span>
+          <div *ngIf="isMenuOpen" class="dropdown-content">
+            <ul>
+              <li><a [routerLink]="['/chofer']">Chofer</a></li>
+              <li><a [routerLink]="['/administrador']">Administrador</a></li>
+            </ul>
+            
+            
+          </div>
+        </div>
+    </nav>
+ 

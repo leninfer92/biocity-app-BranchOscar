@@ -1,0 +1,159 @@
+<div class="container">
+  <br />
+  <h1>Registro de kilometraje</h1>
+  <div class="card text-center">
+    <div class="card-body">
+      <p class="card-text">
+        Para registrar el kilometraje de inicio o fin, con su respectiva novedad
+        dar clic en el boton.
+      </p>
+      <button
+      style="margin-right: 1em;"
+        type="button"
+        class="btn btn-primary"
+        data-bs-toggle="modal"
+        data-bs-target="#modalId"
+      >
+        Registrar
+      </button>
+      <a [routerLink]="['/chofer']" class="btn btn-secondary">Salir</a>
+    </div>
+  </div>
+
+  
+  <div
+    class="modal fade bd-example-modal-sm"
+    id="modalId"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="modalTitleId"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalTitleId">Registro de kilometraje</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+            <div class="col">
+              <label>Vehiculo:</label>
+            <select class="form-select">
+              <option selected>Seleccione</option>
+              <option value="01">01 - PDY7077</option>
+            </select>
+            </div>
+            <div class="col-8">
+            <label>Kilometraje de inicio:</label>
+            <input type="number" class="form-control" />
+          </div>
+          <div class="col"> 
+            <label>Estado/Detalle/Observación del vehiculo:</label>
+            <textarea cols="2" rows="4" class="form-control"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+            Guardar
+          </button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br />
+  <h1>Consulta de registros</h1>
+
+  <table
+    class="table table-hover row-border hover"
+  >
+    <thead>
+      <tr>
+        <th>Fecha</th>
+        <th>Número</th>
+        <th>Placa</th>
+        <th>Kilometraje inicio</th>
+        <th>Detalle inicio</th>
+        <th>Kilometraje fin</th>
+        <th>Detalle fin</th>
+        <th>Editar</th>
+        <th>Eliminar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let activity of activitiesList">
+        <td>{{ activity.created_at }}</td>
+        <td>{{ activity.id }}</td>
+        <td>PDY7666</td>
+        <td>{{ activity.kilometraje_inicio }}</td>
+        <td>{{ activity.estado_inicio }}</td>
+        <td>{{ activity.kilometraje_fin }}</td>
+        <td>{{ activity.estado_fin }}</td>
+        <td>
+          <button
+            class="btn btn-warning"
+            data-bs-toggle="modal"
+            data-bs-target="#editarKilometraje"
+          >
+            <i class="fa-solid fa-pencil"></i></button>
+            </td>
+            <td><button class="btn btn-danger">
+            <i class="fa-solid fa-trash"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div
+    class="modal fade modal-sm"
+    id="editarKilometraje"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="modalTitleId"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalTitleId">Edición de kilometraje</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body modal-sm">
+          <div class="container-fluid">
+            <label>Vehiculo:</label>
+            <select class="form-select" name="vehiculo" id="vehiculo">
+              <option>Seleccione</option>
+              <option value="01">01 - PDY7077</option>
+            </select>
+            <label>Kilometraje de inicio:</label>
+            <input type="number" class="form-control" />
+            <label>Estado/Detalle/Observación del vehiculo:</label>
+            <textarea cols="2" rows="4" class="form-control"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+            Editar
+          </button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+            Cerrar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

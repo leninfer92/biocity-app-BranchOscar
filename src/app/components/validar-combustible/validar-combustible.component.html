@@ -1,0 +1,85 @@
+<div class="container">
+    <br>
+    <h1>Validación de combustible</h1>
+
+    <div class="card text-center">
+        <div class="card-body">
+          <p class="card-text">
+            Validación y eliminación de ordenes de combustible.
+          </p>
+        <a class="btn btn-secondary" [routerLink]="['/administrador']" role="button"
+          >Salir</a
+        >
+        </div>
+      </div>
+      <br>
+
+<div class="table-responsive-md">
+    <table class="table">
+        <thead>
+            <tr>
+               <th>Fecha y hora</th>
+               <th>Chofer</th>
+               <th>Numero</th>
+               <th>Placa</th>
+               <th>Kilometraje</th>
+               <th>Ticket</th>
+               <th>Tipo de combustible</th>
+               <th>Galones</th>
+               <th>Subtotal</th>
+               <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="">
+               <td></td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td><button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#validar"><i class="fa-solid fa-check"></i></button><button class="btn btn-danger"><i class="fa-solid fa-trash"></i></button></td>
+             
+            </tr>
+            
+        </tbody>
+    </table>
+</div>
+
+<div class="modal fade" id="validar" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitleId">Validar orden</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                
+                <label>Numero de vehiculo</label>
+                <input type="number" disabled>
+                <label>Fecha y hora</label><br>
+                <input type="date" disabled><br>
+                <label>Ticket</label><br>
+                <input type="number">
+                <label>Tipo de combustible</label>
+                <select class="form-control">
+                    <option value="">Seleccione su opcion</option>
+                    <option value="0">Diesel</option>
+                    <option value="1">Gasolina</option>
+                </select>
+            </div>
+            <div class="modal-footer">
+               
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</div>

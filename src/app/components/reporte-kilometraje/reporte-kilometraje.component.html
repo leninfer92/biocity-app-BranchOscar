@@ -1,0 +1,41 @@
+<div class="container">
+  <br>
+
+  <h1>Reporte de kilometraje</h1>
+  <div class="card text-center">
+    <div class="card-body">
+      <p class="card-text">
+        Busqueda o filtrado de el registro de actividades de los choferes con su respectiva unidad en un reporte para la toma de decisiones.
+      </p>
+      
+
+    
+    <a class="btn btn-secondary" [routerLink]="['/administrador']" role="button"
+      >Salir</a
+    >
+    </div>
+  </div>
+  <br>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Fecha</th>
+        <th>Número</th>
+        <th>Kilometraje inicio</th>
+        <th>Detalle inicio</th>
+        <th>Kilometraje fin</th>
+        <th>Detalle fin</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let activity of activitiesList">
+        <td>{{activity.created_at}}</td>
+        <td>{{activity.vehiculo_id}}</td>
+        <td>{{activity.kilometraje_inicio}}</td>
+        <td>{{activity.estado_inicio}}</td>
+        <td>{{activity.kilometraje_fin}}</td>
+        <td>{{activity.estado_fin}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

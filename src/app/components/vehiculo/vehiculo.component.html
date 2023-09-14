@@ -1,0 +1,318 @@
+<div class="container">
+  <br />
+  <h1>Registro de vehiculo</h1>
+
+  <div class="card text-center">
+    <div class="card-body">
+      <p class="card-text">
+        Para registrar el vehiculo dar clic en el boton Registrar.
+      </p>
+      <button
+        style="margin-right: 10px"
+        type="button"
+        class="btn btn-primary"
+        data-bs-toggle="modal"
+        data-bs-target="#modalId"
+        (click)="showModalRegistrate()"
+      >
+        Registrar
+      </button>
+
+      <a
+        class="btn btn-secondary"
+        [routerLink]="['/administrador']"
+        role="button"
+        >Salir</a
+      >
+    </div>
+  </div>
+
+  <div
+    class="modal fade"
+    id="modalId"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="modalTitleId"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalTitleId">Registro de vehiculo</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+            <div class="col-3">
+              <label>Número</label>
+              <input
+                type="number"
+                class="form-control"
+                id=""
+                [(ngModel)]="editingCarInfo.numero"
+              />
+            </div>
+            <div class="col-5">
+              <label>Chasis</label>
+              <input
+                type="text"
+                class="form-control"
+                id=""
+                [(ngModel)]="editingCarInfo.chasis"
+              />
+            </div>
+            <div class="col-3">
+              <label>Placa</label>
+              <input
+                type="text"
+                class="form-control"
+                id=""
+                [(ngModel)]="editingCarInfo.placa"
+              />
+            </div>
+            <div class="col-3">
+              <label>Año</label>
+              <input
+                type="number"
+                class="form-control"
+                id=""
+                [(ngModel)]="editingCarInfo.anio"
+              />
+            </div>
+            <div class="col-4">
+              <label>Fecha de compra</label>
+              <input
+                type="date"
+                class="form-control"
+                id=""
+                [(ngModel)]="editingCarInfo.fecha_compra"
+              />
+            </div>
+            <div class="col-5">
+              <label>Modelo</label>
+              <input
+                type="email"
+                class="form-control"
+                id=""
+                [(ngModel)]="editingCarInfo.modelo"
+              />
+            </div>
+            <div class="col-3">
+              <label>Tipo</label>
+              <select
+                class="form-select"
+                [(ngModel)]="editingCarInfo.tipo_vehiculo"
+              >
+                <option>Selección opción</option>
+                <option value="Compactador">Compactador</option>
+                <option value="Cajon abierto">Cajon abierto</option>
+                <option value="Tanquero">Tanquero</option>
+                <option value="Camioneta">Camioneta</option>
+                <option value="Camión">Camión</option>
+                <option value="Motocicleta">Motocicleta</option>
+              </select>
+            </div>
+            <br />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            class="btn btn-success"
+            data-bs-dismiss="modal"
+            (click)="createCar()"
+          >
+            Registrar
+          </button>
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="table-responsive-md">
+    <table
+      class="table table-striped table-hover table-borderless align-middle"
+    >
+      <thead class="table-light">
+        <tr>
+          <th>Id</th>
+          <th>Numero</th>
+          <th>Chasis</th>
+          <th>Placa</th>
+          <th>Año</th>
+          <th>Fecha de compra</th>
+          <th>Modelo</th>
+          <th>Tipo de vehiculo</th>
+          <th>Editar</th>
+          <th>Eliminar</th>
+        </tr>
+      </thead>
+      <tbody class="table-group-divider">
+        <tr *ngFor="let car of carsList">
+          <td>{{ car.id }}</td>
+          <td>{{ car.numero }}</td>
+          <td>{{ car.chasis }}</td>
+          <td>{{ car.placa }}</td>
+          <td>{{ car.anio }}</td>
+          <td>{{ car.fecha_compra }}</td>
+          <td>{{ car.modelo }}</td>
+          <td>{{ car.tipo_vehiculo }}</td>
+          <td>
+            <button
+              class="btn btn-success"
+              data-bs-toggle="modal"
+              data-bs-id="car.id"
+              data-bs-target="#editarVehiculo"
+              (click)="showModal(car)"
+            >
+              <i class="fa-solid fa-pencil"></i>
+            </button>
+          </td>
+
+          <td>
+            <button class="btn btn-danger" (click)="deleteCar(car.id)">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+      <tfoot></tfoot>
+    </table>
+  </div>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="editarVehiculo"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="modalTitleId"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalTitleId">Editar vehiculo</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="col-3">
+            <label>Número</label>
+            <input
+              type="number"
+              class="form-control"
+              hidden
+              id=""
+              name="id"
+              [(ngModel)]="editingCarInfo.id"
+            />
+            <input
+              type="number"
+              class="form-control"
+              id=""
+              name="numero"
+              [(ngModel)]="editingCarInfo.numero"
+            />
+          </div>
+          <div class="col-5">
+            <label>Chasis</label>
+            <input
+              type="text"
+              class="form-control"
+              id=""
+              name="chasis"
+              [(ngModel)]="editingCarInfo.chasis"
+            />
+          </div>
+          <div class="col-3">
+            <label>Placa</label>
+            <input
+              type="text"
+              class="form-control"
+              id=""
+              name="placa"
+              [(ngModel)]="editingCarInfo.placa"
+            />
+          </div>
+          <div class="col-3">
+            <label>Año</label>
+            <input
+              type="number"
+              class="form-control"
+              id=""
+              name="anio"
+              [(ngModel)]="editingCarInfo.anio"
+            />
+          </div>
+          <div class="col-4">
+            <label>Fecha de compra</label>
+            <input
+              type="date"
+              class="form-control"
+              id=""
+              name="fecha_compra"
+              [(ngModel)]="editingCarInfo.fecha_compra"
+            />
+          </div>
+          <div class="col-5">
+            <label>Modelo</label>
+            <input
+              type="email"
+              class="form-control"
+              id=""
+              name="modelo"
+              [(ngModel)]="editingCarInfo.modelo"
+            />
+          </div>
+          <div class="col-6">
+            <label>Tipo</label>
+            <select
+              class="form-select"
+              name="tipo_vehiculo"
+              [(ngModel)]="editingCarInfo.tipo_vehiculo"
+            >
+              <option>Selección opción</option>
+              <option value="Compactador">Compactador</option>
+              <option value="Cajon abierto">Cajon abierto</option>
+              <option value="Tanquero">Tanquero</option>
+              <option value="Camioneta">Camioneta</option>
+              <option value="Camión">Camión</option>
+              <option value="Motocicleta">Motocicleta</option>
+              <option value="Sedan">Sedan</option>
+            </select>
+          </div>
+          <br />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          class="btn btn-success"
+          data-bs-dismiss="modal"
+          (click)="updateCar()"
+        >
+          Actualizar
+        </button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,55 @@
+<div class="container">
+  <br>
+<h1>Menu principal del administrador</h1>
+<br/>
+<div class="row row-cols-1 row-cols-md-2 g-4">
+  <div class="col">
+    <div class="card">
+      
+      <div class="card-body">
+        <h5 class="card-title">Vehiculos</h5>
+        <p class="card-text">Registro de vehiculos.</p>
+      </div>
+      <div class="card-footer bg-transparent">
+        <button type="button" class="btn btn-primary" [routerLink]="['/vehiculo']">Registrar</button>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card">
+      
+      <div class="card-body">
+        <h5 class="card-title">Combustible</h5>
+        <p class="card-text">Validación de combustible.</p>
+      </div>
+      <div class="card-footer bg-transparent">
+        <button type="button" class="btn btn-secondary" [routerLink]="['/validar-combustible']">Validar</button>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card">
+      
+      <div class="card-body">
+        <h5 class="card-title">Kilometraje</h5>
+        <p class="card-text">Reporte de kilometraje.</p>
+      </div>
+      <div class="card-footer bg-transparent">
+        <button type="button" class="btn btn-warning" [routerLink]="['/reporte-kilometraje']">Ingresar</button>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card">
+      
+      <div class="card-body">
+        <h5 class="card-title">Novedades</h5>
+        <p class="card-text">Reporte del estado de los vehiculos.</p>
+      </div>
+      <div class="card-footer bg-transparent">
+        <button type="button" class="btn btn-danger" [routerLink]="['/estado-vehiculo']">Ingresar</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
