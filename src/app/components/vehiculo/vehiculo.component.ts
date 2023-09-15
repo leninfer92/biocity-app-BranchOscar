@@ -31,7 +31,7 @@ export class VehiculoComponent implements OnInit, OnChanges {
       anio: '',
       fecha_compra: '',
       modelo: '',
-      tipo_vehiculo: 'Selección opción',
+      tipo_vehiculo: '',
     };
     this.editingCarInfo = this.updateCarInfo;
   }
@@ -59,7 +59,7 @@ export class VehiculoComponent implements OnInit, OnChanges {
           anio: '',
           fecha_compra: '',
           modelo: '',
-          tipo_vehiculo: 'Selección opción',
+          tipo_vehiculo: 'Seleccione',
         };;
       },
       error: (error) => {
@@ -131,7 +131,7 @@ export class VehiculoComponent implements OnInit, OnChanges {
       anio: '',
       fecha_compra: '',
       modelo: '',
-      tipo_vehiculo: 'Selección opción',
+      tipo_vehiculo: 'Seleccione',
     };
   }
 
