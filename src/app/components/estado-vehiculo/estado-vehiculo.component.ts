@@ -15,36 +15,19 @@ export class EstadoVehiculoComponent {
   }
 
   ngOnInit(): void {
-    console.log('Into ngOnInit');
     this.allActivities();
   }
 
   allActivities(): void {
-    console.log('Into allCars');
     this.activitiesService.getAllActivities().subscribe({
       next: (data: any) => {
-        console.log('La data que tengo es: ', data)
         this.activitiesList = data.data;
-        this.activitiesList.forEach((activity) => {
-          activity.created_at = this.formatDate(activity.created_at);
-        });
-        console.log(this.activitiesList);
       },
       error: (error) => {
-        console.error('Error al listar las actividades', error);
       },
       complete: () => {
-        console.log('La subscripción se ha completado.');
       },
     });
-  }
-
-  formatDate(dateString: string): string {
-    const date = new Date(dateString);
-    const day = date.getDate().toString().padStart(2, '0');
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const year = date.getFullYear();
-    return `${day}/${month}/${year}`;
   }
 
 }

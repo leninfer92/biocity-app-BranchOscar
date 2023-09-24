@@ -1,4 +1,4 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { VehiculosService } from 'src/app/services/vehiculos.service';
 
 export interface carsInfo {
@@ -16,7 +16,7 @@ export interface carsInfo {
   templateUrl: './vehiculo.component.html',
   styleUrls: ['./vehiculo.component.css'],
 })
-export class VehiculoComponent implements OnInit, OnChanges {
+export class VehiculoComponent implements OnInit {
   carsList!: carsInfo[];
   updateCarInfo!: carsInfo;
   editingCarInfo!: carsInfo;
@@ -37,20 +37,13 @@ export class VehiculoComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    console.log('Into ngOnInit');
     this.allCars();
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log('Se hizo un cambio');
-  }
-
   allCars(): void {
-    console.log('Into allCars');
     this.vehiculoService.getAllVehicles().subscribe({
       next: (data: any) => {
         this.carsList = data.data;
-        console.log(this.carsList);
         this.editingCarInfo = {
           id: 0,
           numero: '',
@@ -60,28 +53,23 @@ export class VehiculoComponent implements OnInit, OnChanges {
           fecha_compra: '',
           modelo: '',
           tipo_vehiculo: 'Seleccione',
-        };;
+        };
       },
       error: (error) => {
-        console.error('Error al listar los vehiculos', error);
       },
       complete: () => {
-        console.log('La subscripción se ha completado.');
       },
     });
   }
 
   deleteCar(id: number): void {
-    console.log('Boton con id: ', id);
     this.vehiculoService.deleteVehicleById(id).subscribe({
       next: (data: any) => {
         this.allCars();
       },
       error: (error) => {
-        console.error('Error al listar los vehiculos', error);
       },
       complete: () => {
-        console.log('La subscripción se ha completado.');
       },
     });
   }
@@ -110,10 +98,8 @@ export class VehiculoComponent implements OnInit, OnChanges {
         this.allCars();
       },
       error: (error) => {
-        console.error('Error al listar los vehiculos', error);
       },
       complete: () => {
-        console.log('La subscripción se ha completado.');
       },
     });
   }
@@ -151,10 +137,8 @@ export class VehiculoComponent implements OnInit, OnChanges {
         this.allCars();
       },
       error: (error) => {
-        console.error('Error al listar los vehiculos', error);
       },
       complete: () => {
-        console.log('La subscripción se ha completado.');
       },
     });
   }

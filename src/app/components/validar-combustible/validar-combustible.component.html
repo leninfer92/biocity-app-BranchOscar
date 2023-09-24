@@ -1,87 +1,156 @@
 <div class="container">
-    <br>
-    <h1>Validación de combustible</h1>
+  <br />
+  <h1>Validación de combustible</h1>
 
-    <div class="card text-center">
-        <div class="card-body">
-          <p class="card-text">
-            Validación y eliminación de ordenes de combustible.
-          </p>
-        <a class="btn btn-secondary" [routerLink]="['/administrador']" role="button"
-          >Salir</a
-        >
+  <div class="card text-center">
+    <div class="card-body">
+      <p class="card-text">
+        Validación y eliminación de ordenes de combustible.
+      </p>
+      <a
+        class="btn btn-secondary"
+        [routerLink]="['/administrador']"
+        role="button"
+        >Salir</a
+      >
+    </div>
+  </div>
+  <br />
+
+  <div class="table-responsive-md">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Fecha y hora</th>
+          <th>Numero</th>
+          <th>Placa</th>
+          <th>Kilometraje</th>
+          <th>Ticket</th>
+          <th>Tipo de combustible</th>
+          <th>Galones</th>
+          <th>Subtotal</th>
+          <th>Validar</th>
+          <th>Eliminar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let combustible of combustibleList">
+          <td>{{ combustible.created_at }}</td>
+          <td>{{ combustible.numero }}</td>
+          <td>{{ combustible.placa }}</td>
+          <td>
+            {{ combustible.kilometraje ? combustible.kilometraje : "---" }}
+          </td>
+          <td>
+            {{ combustible.ticket ? combustible.ticket : "En espera..." }}
+          </td>
+          <td>
+            {{
+              combustible.tipo_combustible === 0
+                ? "Diesel"
+                : combustible.tipo_combustible === 1
+                ? "Gasolina"
+                : "---"
+            }}
+          </td>
+          <td>{{ combustible.galon ? combustible.galon : "---" }}</td>
+          <td>
+            {{
+              combustible.tipo_combustible === 0
+                ? (combustible.galon * 1.74).toFixed(2)
+                : combustible.tipo_combustible === 1
+                ? (combustible.galon * 2.4).toFixed(2)
+                : "---"
+            }}
+          </td>
+          <td>
+            <button
+              class="btn btn-success"
+              data-bs-toggle="modal"
+              data-bs-target="#validar"
+              (click)="showModal(combustible)"
+            >
+              <i class="fa-solid fa-check"></i>
+            </button>
+          </td>
+          <td>
+            <button class="btn btn-danger" (click)="deleteOrder(combustible.id)">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div
+    class="modal fade"
+    id="validar"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="modalTitleId"
+    aria-hidden="true"
+    data-bs-backdrop="static"
+    data-bs-keyboard="false"
+  >
+    <div
+      class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm"
+      role="document"
+    >
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalTitleId">Validar orden</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+            (click)="setModal()"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+            <label>Numero de vehiculo</label>
+            <input
+              class="form-control"
+              type="number"
+              disabled
+              [(ngModel)]="updateCombustible.numero"
+            />
+            <label>Fecha y hora</label><br />
+            <input
+              class="form-control"
+              type="date"
+              disabled
+              [(ngModel)]="updateCombustible.created_at"
+            /><br />
+            <label *ngIf="updateCombustible.kilometraje != null">Galones</label><br />
+            <input *ngIf="updateCombustible.kilometraje != null" class="form-control" type="number" [(ngModel)]="updateCombustible.galon"/>
+            <label>Ticket</label><br />
+            <input class="form-control" type="number" [(ngModel)]="updateCombustible.ticket"/>
+            <label *ngIf="updateCombustible.kilometraje != null">Tipo de combustible</label>
+            <select
+              *ngIf="updateCombustible.kilometraje != null"
+              class="form-select"
+              [(ngModel)]="updateCombustible.tipo_combustible"
+            >
+              <option value="">Seleccione</option>
+              <option value="0">Diesel</option>
+              <option value="1">Gasolina</option>
+            </select>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-dismiss="modal"
+              (click)="validate()"
+            >
+              Guardar
+            </button>
+          </div>
         </div>
       </div>
-      <br>
-
-<div class="table-responsive-md">
-    <table class="table">
-        <thead>
-            <tr>
-               <th>Fecha y hora</th>
-               <th>Chofer</th>
-               <th>Numero</th>
-               <th>Placa</th>
-               <th>Kilometraje</th>
-               <th>Ticket</th>
-               <th>Tipo de combustible</th>
-               <th>Galones</th>
-               <th>Subtotal</th>
-               <th>Validar</th>
-               <th>Eliminar</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr class="">
-               <td></td>
-               <td></td>
-               <td></td>
-               <td></td>
-               <td></td>
-               <td></td>
-               <td></td>
-               <td></td>
-               <td></td>
-               <td><button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#validar"><i class="fa-solid fa-check"></i></button></td>
-               <td><button class="btn btn-danger"><i class="fa-solid fa-trash"></i></button></td>
-             
-            </tr>
-            
-        </tbody>
-    </table>
-</div>
-
-<div class="modal fade" id="validar" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalTitleId">Validar orden</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="container-fluid">
-                
-                <label>Numero de vehiculo</label>
-                <input class="form-control" type="number" disabled>
-                <label>Fecha y hora</label><br>
-                <input class="form-control" type="date" disabled><br>
-                <label>Ticket</label><br>
-                <input class="form-control" type="number">
-                <label>Tipo de combustible</label>
-                <select class="form-select">
-                    <option value="">Seleccione</option>
-                    <option value="0">Diesel</option>
-                    <option value="1">Gasolina</option>
-                </select>
-            </div>
-            <div class="modal-footer">
-               
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
-            </div>
-            </div>
-        </div>
     </div>
-</div>
-
-
+  </div>
 </div>

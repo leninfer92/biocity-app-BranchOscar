@@ -1,155 +1,197 @@
 <div class="container">
-    <br>
-    <h1>Registro de ordenes de combustible</h1>
-<div class="card-group">
-    <div class="card border-dark mb-3 text-center" style="max-width: 18rem;">
-          <div class="card-body text-dark">
-          <h5 class="card-title">Registro de combustible</h5>
-          <p class="card-text">Generar orden de combustible con el kilometraje actual.</p>
-          <br>
-          <button data-bs-toggle="modal" data-bs-target="#registrarKilometraje" type="button" class="btn btn-success">Registrar</button>
-        </div>
-        
+  <br />
+  <h1>Registro de ordenes de combustible</h1>
+  <div class="card-group">
+    <div class="card border-dark mb-3 text-center" style="max-width: 18rem">
+      <div class="card-body text-dark">
+        <h5 class="card-title">Registro de combustible</h5>
+        <p class="card-text">
+          Generar orden de combustible con el kilometraje actual.
+        </p>
+        <br />
+        <button
+          data-bs-toggle="modal"
+          data-bs-target="#registrarKilometraje"
+          type="button"
+          class="btn btn-success"
+        >
+          Registrar
+        </button>
       </div>
-      <div class="card border-dark mb-3 text-center" style="max-width: 18rem;">
-        <div class="card-body text-border-dark">
-          <h5 class="card-title">Registro de combustible adicional</h5>
-          <p class="card-text">Generar orden de combustible adicional barredoras, motores, etc.</p>
-          <button data-bs-toggle="modal" data-bs-target="#combustibleAdicional" type="button" class="btn btn-warning">Registrar</button>
-        </div>
-        
+    </div>
+    <div class="card border-dark mb-3 text-center" style="max-width: 18rem">
+      <div class="card-body text-border-dark">
+        <h5 class="card-title">Registro de combustible adicional</h5>
+        <p class="card-text">
+          Generar orden de combustible adicional barredoras, motores, etc.
+        </p>
+        <button
+          data-bs-toggle="modal"
+          data-bs-target="#combustibleAdicional"
+          type="button"
+          class="btn btn-warning"
+        >
+          Registrar
+        </button>
       </div>
-      
-</div>
-<div class="modal fade" id="registrarKilometraje" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalTitleId">Registro de combustible</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <label>Unidad:</label>
-                <select class="form-select">
-                    <option selected>Seleccione</option>
-                    <option></option>
-                </select>
-                <label>Ingrese kilometraje actual:</label>
-                <input type="number" class="form-control">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            </div>
-        </div>
     </div>
-</div>
-
-<div class="modal fade" id="combustibleAdicional" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalTitleId">Registro de combustible adicional</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <label>Unidad:</label>
-                <select class="form-select">
-                    <option selected>Seleccione</option>
-                    <option></option>
-                </select>
-                <label>Ingrese cantidad de galones:</label>
-                <input type="number" class="form-control">
-                <label>Tipo de combustible:</label>
-                <select class="form-select">
-                    <option selected>Seleccione</option>
-                    <option value="0">Diesel</option>
-                    <option value="1">Gasolina</option>
-                </select>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            </div>
+  </div>
+  <div
+    class="modal fade"
+    id="registrarKilometraje"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="modalTitleId"
+    aria-hidden="true"
+    data-bs-backdrop="static"
+    data-bs-keyboard="false"
+  >
+    <div
+      class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm"
+      role="document"
+    >
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalTitleId">Registro de combustible</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+            (click)="setModal()"
+          ></button>
         </div>
+        <div class="modal-body">
+          <label>Unidad:</label>
+          <select class="form-select" [(ngModel)]="updateOrder.id">
+            <option selected default value="null">Seleccione</option>
+            <option *ngFor="let car of carsList" [ngValue]="car.id">
+              {{ car.id }} - {{ car.placa }}
+            </option>
+          </select>
+          <label>Ingrese kilometraje actual:</label>
+          <input
+            type="number"
+            class="form-control"
+            [(ngModel)]="updateOrder.km_carga"
+          />
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-dismiss="modal"
+            (click)="createOrder()"
+          >
+            Guardar
+          </button>
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+            (click)="setModal()"
+          >
+            Cerrar
+          </button>
+        </div>
+      </div>
     </div>
-</div>
-<h1>Consulta de ordenes de combustible</h1>
-<br>
-<div class="table-responsive">
-    <table class="table table-striped
-    table-hover	
-    table-borderless
-    align-middle">
-        <thead class="table-light">
-            
-            <tr>
-                <th>Fecha y hora</th>
-                <th>Número</th>
-                <th>Placa</th>
-                <th>Km de carga</th>
-                <th>Galones</th>
-                <th>Tipo</th>
-           
-                <th>Eliminar</th>
-            </tr>
-            </thead>
-     <tbody>
-                <tr>
-                    <td scope="row">Item</td>
-                    <td>Item</td>
-                    <td>Item</td>
-                    <td>Item</td>
-                    <td>Item</td>
-                    <td>Item</td>
-                    <td> <button class="btn btn-danger"><i class="fa-solid fa-trash"></i></button></td>
-                </tr>
-            </tbody>    
+  </div>
 
+  <div
+    class="modal fade"
+    id="combustibleAdicional"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="modalTitleId"
+    aria-hidden="true"
+    data-bs-backdrop="static"
+    data-bs-keyboard="false"
+  >
+    <div
+      class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm"
+      role="document"
+    >
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalTitleId">
+            Registro de combustible adicional
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+            (click)="setModal()"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <label>Unidad:</label>
+          <select class="form-select" [(ngModel)]="updateOrder.id">
+            <option selected default value="null">Seleccione</option>
+            <option *ngFor="let car of carsList" [ngValue]="car.id">
+              {{ car.id }} - {{ car.placa }}
+            </option>
+          </select>
+          <label>Ingrese cantidad de galones:</label>
+          <input type="number" class="form-control" [(ngModel)]="updateOrder.galones"/>
+          <label>Tipo de combustible:</label>
+          <select class="form-select" [(ngModel)]="updateOrder.tipo">
+            <option selected default>Seleccione</option>
+            <option value="0">Diesel</option>
+            <option value="1">Gasolina</option>
+          </select>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="createOrderAditional()">
+            Guardar
+          </button>
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+            (click)="setModal()"
+          >
+            Cerrar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <h1>Consulta de ordenes de combustible</h1>
+  <br />
+  <div class="table-responsive">
+    <table
+      class="table table-striped table-hover table-borderless align-middle"
+    >
+      <thead class="table-light">
+        <tr>
+          <th>Fecha y hora</th>
+          <th>Número</th>
+          <th>Placa</th>
+          <th>Km de carga</th>
+          <th>Galones</th>
+          <th>Tipo</th>
+          <th>Ticket</th>
+          <th>Eliminar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of ordersList">
+          <td>{{order.created_at}}</td>
+          <td>{{order.numero}}</td>
+          <td>{{order.placa}}</td>
+          <td>{{order.kilometraje ? order.kilometraje : '---'}}</td>
+          <td>{{order.galon ? order.galon : '---'}}</td>
+          <td>{{order.tipo_combustible === 0 ? 'Diesel' : (order.tipo_combustible === 1 ? 'Gasolina' : '---')}}</td>
+          <td>{{order.ticket ? order.ticket : 'Por validar'}}</td>
+          <td>
+            <button class="btn btn-danger" (click)="deleteOrder(order.id)">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
     </table>
-</div>
-
-
-<div class="modal fade" id="editar" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-                <div class="modal-header">
-                        <h5 class="modal-title" id="modalTitleId">Editar orden de combustible</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="container-fluid">
-                          <div class="col-3">
-                            <label >Número</label>
-                            <input type="number" class="form-control" id="">
-                          </div>
-                            <div class="col-3">
-                              <label>Km Carga</label>
-                              <input type="number" class="form-control" id="exampleFormControlInput1">
-                            </div>
-                            <div class="col-4">
-                              <label>Galones</label>
-                              <input type="number" class="form-control" id="exampleFormControlInput1">
-                            </div>
-                            <div class="col-5">
-                              <label>Tipo</label>
-                    
-                              <select class="form-select">
-                                  <option>Seleccione</option>
-                                  <option value="0">Diesel</option>
-                                  <option value="1">Gasolina</option>
-                                  
-                              </select>
-                            </div>
-                            <br>
-                          
-                        </div>
-                      </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Editar</button>
-            </div>
-        </div>
-    </div>
-</div>
+  </div>
 </div>

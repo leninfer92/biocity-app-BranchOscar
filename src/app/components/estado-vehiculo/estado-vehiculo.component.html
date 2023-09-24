@@ -22,7 +22,6 @@
         <th>Fecha</th>
         <th>Número</th>
         <th>Placa</th>
-        <th>Chofer</th>
         <th>Detalle inicio</th>
         <th>Detalle fin</th>
       </tr>
@@ -30,9 +29,8 @@
     <tbody>
       <tr *ngFor="let activity of activitiesList">
         <td>{{activity.created_at}}</td>
-        <td>{{activity.created_at}}</td>
-        <td>PDY7666</td>
-        <td>200.000</td>
+        <td>{{activity.numero}}</td>
+        <td>{{activity.placa}}</td>
         <td>{{activity.estado_inicio}}</td>
         <td>{{activity.estado_fin}}</td>
       </tr>

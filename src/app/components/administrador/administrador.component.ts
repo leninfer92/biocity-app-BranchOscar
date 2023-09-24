@@ -29,10 +29,8 @@ export class AdministradorComponent implements OnInit {
         this.countCars = data.data.length;
       },
       error: (error) => {
-        console.error('Error al listar los vehiculos', error);
       },
       complete: () => {
-        console.log('La subscripción se ha completado.');
       },
     });
   }
@@ -42,11 +40,9 @@ export class AdministradorComponent implements OnInit {
       next: (data: any) => {
         this.countOrders = data.data.length;
       },
-      error: (error) => {
-        console.error('Error al listar los vehiculos', error);
+      error: (error) => {;
       },
       complete: () => {
-        console.log('La subscripción se ha completado.');
       },
     });
   }
